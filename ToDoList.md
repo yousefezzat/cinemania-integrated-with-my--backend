@@ -23,7 +23,7 @@
 - [x] Modify the Login and register pages
 - [x] Modify the cards apperance
 - [x] Fix scrolldown navbar background
-- [ ] Recap (code and theoretically)
+- [x] Recap (code and theoretically)
 - [ ] Clean the code and Remove Comments
 - [ ] Modify Ui
 - [ ] Pagination
