@@ -1,0 +1,42 @@
+.card {
+  transition: transform 0.3s ease-in-out;
+  border: 1px solid #ddd; /* Adding a border for a better visual separation */
+  border-radius: 8px; /* Rounded corners for cards */
+  height: 100%; /* Ensuring all cards have the same height */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Slightly increasing the scale on hover */
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Adding a box-shadow on hover */
+}
+
+.card img {
+  width: 100%;
+  border-radius: 8px 8px 0 0; /* Rounded top corners for the card image */
+}
+
+.card mat-card-content {
+  padding: 16px;
+  height: 100%;
+}
+
+.card h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.card p {
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  
+}
+
+.card a {
+  color: #E50914;
+  cursor: pointer;
+}
+

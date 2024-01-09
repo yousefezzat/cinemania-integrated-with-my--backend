@@ -1,0 +1,36 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form #loginForm="ngForm" class="card p-4" (ngSubmit)="handleLogin()">
+        <h2 class="text-center mb-4">Login</h2>
+        <div class="form-group">
+          <label for="exampleInputEmail1" i18n>{{emailLabel}}</label>
+          <input [(ngModel)]="email" name="email" type="email" class="form-control" id="exampleInputEmail1"
+            placeholder="Enter email" required email>
+          <div *ngIf="loginForm.controls['email']?.touched && loginForm.controls['email'].invalid" class="text-danger">
+            <span *ngIf="loginForm.controls['email'].errors?.['required']">Email is required.</span>
+            <span *ngIf="loginForm.controls['email'].errors?.['email']">Invalid email format.</span>
+
+          </div>
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="exampleInputPassword1" i18n>{{passwordLabel}}</label>
+          <input [(ngModel)]="password" name="password" type="password" class="form-control" id="exampleInputPassword1"
+            placeholder="Password" required minlength="6">
+          <div *ngIf="loginForm.controls['password']?.touched && loginForm.controls['password'].invalid"
+            class="text-danger">
+            <span *ngIf="loginForm.controls['password'].errors?.['required']">Password is required.</span>
+            <span *ngIf="loginForm.controls['password'].errors?.['minlength']">Password must be at least 6 characters
+              long.</span>
+          </div>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary btn-block" [disabled]="loginForm.invalid">{{loginLabel}}</button>
+        <p class="mt-3 text-center">Don't have an account? <a routerLink="/Register">{{registerLabel}}</a></p>
+      </form>
+    </div>
+  </div>
+
+</div>
+

@@ -1,0 +1,32 @@
+
+form {
+    background-color: #000;
+    color: #fff; /* Set text color to white */
+    padding: 20px;
+  }
+  
+  /* Style the form controls */
+  .form-group label {
+    color: #fff; /* Label text color */
+  }
+  
+  .form-control {
+    background-color: #333; /* Input background color */
+    color: #fff; /* Input text color */
+  }
+  
+  /* Style the submit button */
+  .btn-primary {
+    background-color: red; /* Red button background */
+    color: #fff; /* White text color */
+    border-color: red; /* Red border color */
+  }
+  
+  /* Change button color on hover */
+  .btn-primary:hover {
+    background-color: #ff0000ad; /* Darker red on hover */
+    border-color: #ff0000ad;
+  }
+
+ 
+  

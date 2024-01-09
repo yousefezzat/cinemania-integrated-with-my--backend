@@ -1,0 +1,20 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+body {
+    font-family: 'Ubuntu', sans-serif;
+    background-color: black;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+ .mdc-circular-progress__indeterminate-circle-graphic {
+    stroke: #fd0000 !important;
+    
+    
+}
+.spinner{
+    margin:0 auto;
+
+}
