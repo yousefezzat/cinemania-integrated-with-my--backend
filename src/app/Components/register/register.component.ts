@@ -19,17 +19,15 @@ export class RegisterComponent implements OnInit {
     if (this.userService.isLogged())
       this.router.navigate(['/Home']);
   }
+
   handleRegister() {
-
-    this.registered = this.userService.register(this.email, this.password, this.name);
-    if (!this.registered) {
-      alert("Register failed. Please try again.");
-      return false;
-    }
-    this.router.navigate(['Login']);
-
-    return true;
+    this.userService.register(this.name,this.email, this.password).subscribe(
+      () => {
+        this.router.navigate(['Login']);
+      },
+      (error) => {
+        alert("Register failed. Please try again.");
+      }
+    );
   }
-
-
 }

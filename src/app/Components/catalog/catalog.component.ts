@@ -19,6 +19,10 @@ export class CatalogComponent implements OnInit {
   categoryTitle: string = "";
   loading: boolean = true; 
 
+  currentPage: number = 1;
+  pageSize: number = 4;
+
+
 
   constructor(private movieService: MovieService, private router: Router) { }
 
@@ -29,8 +33,8 @@ export class CatalogComponent implements OnInit {
 
   }
   getMovies() {
-    this.movieService.getMovies().subscribe((movies) => {
-      this.receivedMovies = movies.results;
+    this.movieService.getMovies(this.currentPage - 1, this.pageSize).subscribe((movies) => {
+      this.receivedMovies = movies;
       this.loading = false;
       this.showMore = new Array<boolean>(this.receivedMovies.length).fill(false);
     },
@@ -71,7 +75,8 @@ export class CatalogComponent implements OnInit {
     }
   }
   detectEnv() {
-    if (environment.baseMoviesUrl == "https://api.themoviedb.org/3/movie/top_rated?api_key=") {
+    // if (environment.baseMoviesUrl == "https://api.themoviedb.org/3/movie/top_rated?api_key=")
+    if (true) {
       this.categoryTitle = "Top Rated Movies";
     }
     else {

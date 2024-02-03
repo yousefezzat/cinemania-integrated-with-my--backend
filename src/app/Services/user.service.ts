@@ -1,52 +1,59 @@
 import { Injectable } from '@angular/core';
-import { Users } from '../../data/users';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class UserService {
-  isLoggedInSubject: BehaviorSubject<boolean>;
-  constructor() {
-    this.isLoggedInSubject = new BehaviorSubject<boolean>(false);
+  private isLoggedInSubject: BehaviorSubject<boolean>;
+  private authTokenKey = 'authToken';
+
+  constructor(private http: HttpClient) {
+    this.isLoggedInSubject = new BehaviorSubject<boolean>(this.isTokenAvailable());
   }
 
-  login(email: string, password: string) {
-    for (let i = 0; i < Users.length; i++) {
-      if (Users[i].email === email && Users[i].password === password) {
-        const loggedInUser = { email: email, name: Users[i].name };
-        localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
-        console.log(localStorage.getItem("loggedInUser"));
-        this.isLoggedInSubject.next(true);
-        return true;
-      }
-    }
-    return false;
+  login(email: string, password: string): Observable<any> {
+    const loginData = { email, password };
+
+    return this.http.post('http://localhost:8081/api/v1/auth/login', loginData).pipe(
+      tap((response: any) => {
+        this.handleAuthentication(response.token);
+      })
+    );
   }
-  logout() {
-    localStorage.removeItem("loggedInUser")
+
+  logout(): void {
+    localStorage.removeItem(this.authTokenKey);
     this.isLoggedInSubject.next(false);
-
   }
+
   isLogged(): boolean {
-    return localStorage.getItem("loggedInUser") ? true : false
-
+    return this.isTokenAvailable();
   }
 
-  register(email: string, password: string, name: string) {
-    for (let i = 0; i < Users.length; i++) {
-      if (Users[i].email === email) {
-        return false;
-      }
-    }
-    Users.push({ email: email, password: password, name: name });
-    return true;
+  register(name: string ,email: string, password: string ): Observable<any> {
+    const registerData = { name,email, password };
+
+    return this.http.post('http://localhost:8081/api/v1/auth/register', registerData).pipe(
+      
+      tap((response: any) => {
+        this.handleAuthentication(response.token);
+      })
+    );
   }
 
+  private handleAuthentication(token: string): void {
+    localStorage.setItem(this.authTokenKey, token);
+    this.isLoggedInSubject.next(true);
+  }
 
+  private isTokenAvailable(): boolean {
+    return !!localStorage.getItem(this.authTokenKey);
+  }
 
-
-
-
+  getAuthToken(): string | null {
+    return localStorage.getItem(this.authTokenKey);
+  }
 }

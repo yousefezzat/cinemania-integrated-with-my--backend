@@ -22,8 +22,8 @@ export class MovieDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.moveID = Number(this.router.snapshot.paramMap.get('id'));
     this.getMovie(this.moveID);
-    this.getVideo(this.moveID);
-    this.getMovieCast(this.moveID);
+    // this.getVideo(this.moveID);
+    // this.getMovieCast(this.moveID);
   }
 
 
@@ -33,22 +33,22 @@ export class MovieDetailsComponent implements OnInit {
     });
   }
 
-  getVideo(id: number) {
-    this.service.getMovieVideo(id).subscribe((result) => {
-      result.results.forEach((element: any) => {
-        if (element.type == "Trailer") {
-          this.getMovieVideo = element.key;
-        }
-      });
+  // getVideo(id: number) {
+  //   this.service.getMovieVideo(id).subscribe((result) => {
+  //     result.results.forEach((element: any) => {
+  //       if (element.type == "Trailer") {
+  //         this.getMovieVideo = element.key;
+  //       }
+  //     });
 
-    });
-  }
+  //   });
+  // }
 
-  getMovieCast(id: number) {
-    this.service.getMovieCast(id).subscribe((result) => {
-      this.getMovieCastNames = result.cast.splice(0, 9);
-    });
-  }
+  // getMovieCast(id: number) {
+  //   this.service.getMovieCast(id).subscribe((result) => {
+  //     this.getMovieCastNames = result.cast.splice(0, 9);
+  //   });
+  // }
 
 
 }

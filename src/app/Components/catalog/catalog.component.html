@@ -1,4 +1,4 @@
-<div class="container mt-5 ">
+<div class="container mt-5">
   <br>
 </div>
 
@@ -14,13 +14,29 @@
 <br>
 <br>
 
-<div *ngIf="loading else moviesList" >
-  <mat-spinner class="spinner" ></mat-spinner>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-md-4">
+      <label for="pageInput" class="form-label h5">Page Number:</label>
+      <input type="number" class="form-control" id="pageInput" [(ngModel)]="currentPage" name="pageInput" min="1" max ="5">
+    </div>
+    <!-- <div class="col-md-4">
+      <label for="sizeInput" class="form-label h5">Page Size:</label>
+      <input type="number" class="form-control" id="sizeInput" [(ngModel)]="pageSize" name="sizeInput" min="0">
+    </div> -->
+    <div class="col-md-4">
+      <button class="btn btn-primary mt-4" (click)="getMovies()">Apply</button>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="loading else moviesList" class="container mt-3">
+  <mat-spinner class="spinner"></mat-spinner>
 </div>
 
 <ng-template #moviesList>
-
-  <div *ngIf= !loading class="container mt-5">
+  <div *ngIf="!loading" class="container mt-5">
     <h2 class="text-white">{{categoryTitle}}</h2>
     <div class="row row-cols-2 row-cols-md-4 g-4">
       <div class="col mb-4" *ngFor="let movie of receivedMovies">

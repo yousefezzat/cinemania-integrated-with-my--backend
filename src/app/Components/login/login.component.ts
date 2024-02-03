@@ -18,28 +18,27 @@ export class LoginComponent implements OnInit {
   password: string = "";
   loggedIn: boolean = false;
 
+
+
+
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit() {
     if (this.userService.isLogged())
       this.router.navigate(['/Home']);
-
   }
 
   handleLogin() {
     if (this.userService.isLogged())
       this.router.navigate(['/Home']);
 
-    this.loggedIn = this.userService.login(this.email, this.password);
-    if (!this.loggedIn) {
-      alert("Login failed. Please check your credentials and try again.");
-      return false;
-    }
-    this.router.navigate(['Home']);
-
-    return true;
+    this.userService.login(this.email, this.password).subscribe(
+      () => {
+        this.router.navigate(['Home']);
+      },
+      (error) => {
+        alert("Login failed. Please check your credentials and try again.");
+      }
+    );
   }
-
-
-
 }
