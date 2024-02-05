@@ -10,8 +10,7 @@ import { TopRatedMoviesResponseInterface } from '../../../Models/top-rated-movie
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit, AfterViewInit {
-  // baseUrl = environment.baseUrl;
-  baseUrl = environment.myApi;
+ 
   imgUrl = environment.baseImgUrl;
 
  

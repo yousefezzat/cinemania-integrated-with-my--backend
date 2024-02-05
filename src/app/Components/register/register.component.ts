@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['Login']);
       },
       (error) => {
-        alert("Register failed. Please try again.");
+        alert("This Email is already registered");
       }
     );
   }
